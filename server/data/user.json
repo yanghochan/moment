@@ -1,0 +1,45 @@
+[
+  {
+<<<<<<< HEAD
+    "username": "ukg_15",
+    "password": "yanghochan1590@",
+    "nickname": "hochan"
+  },
+  {
+    "username": "1",
+    "password": "$2b$10$NN5k2rAViK1YlVFkDntQCOSnSk4H0gT9RDTrSnoIRa6DWQxreVTNq",
+    "nickname": "1"
+  },
+  {
+    "username": "2",
+    "password": "$2b$10$hMIa5YzMr.M3M20AzDHVO.scP7g4VwFlNZqqCkmFTU5j7bVRkHMH6",
+    "nickname": "2"
+  },
+  {
+    "username": "4",
+    "password": "$2b$10$EdsUdQ5K.M9y/sgfbyL4lOnVmQubD13cDiOUEbCO/AN2ugzPTsZ/i",
+    "nickname": "4"
+  },
+  {
+    "username": "5",
+    "password": "$2b$10$FnNDWYQMmnJda2ITckXEIOfUSyUPFkdJ4iiGr4Czd6wr/2X1rvLb.",
+    "nickname": "5"
+  },
+  {
+    "username": "3",
+    "password": "$2b$10$5rKaCcm.1/cSVZIwtDviieq./qXULYmwpZNY9iFUrsDo7m2QrNaxC",
+    "nickname": "3"
+=======
+    "username": "admin",
+    "password": "$2b$10$CQV9Rw4Kq.xcVBB6FxTc8uj.KCgZD/d4VLR5nJHBMCSZDQTDtawW6",
+    "nickname": "관리자계정",
+    "role": "admin"
+  },
+  {
+    "username": "4",
+    "password": "$2b$10$soTe4PBUy9oiBU7Sq4rqsuKBmpDKkxxxVjC4IYggRwfSJ8ipZDaoS",
+    "nickname": "4",
+    "role": "user"
+>>>>>>> bff76f3 ('25.04.03)
+  }
+]

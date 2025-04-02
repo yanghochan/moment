@@ -1,0 +1,74 @@
+/* buttons.css - 버튼 공통 스타일 */
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  .btn.delete {
+    background: #eb5757;
+  }
+  
+  .btn.cancel {
+    background: var(--gray);
+  }
+  
+  .btn.save {
+    background: #219653;
+  }
+  
+  .btn.edit {
+    background: #007878;
+  }
+  
+  /* auth.css - 로그인/회원가입 전용 */
+  
+  .auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #f4f6f9, #e0e7ff);
+  }
+  
+  .auth-card {
+    background-color: white;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px var(--shadow);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .auth-title {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-form input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .auth-form .btn {
+    width: 100%;
+  }
+  

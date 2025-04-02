@@ -1,0 +1,144 @@
+/* Header.css - 고급 네비게이션 헤더 스타일 */
+
+.site-header {
+<<<<<<< HEAD
+    background-color: #ffffff;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+  
+  .logo {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .logo-icon {
+    font-size: 1.5rem;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-links .btn {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    color: var(--color-primary);
+    transition: background-color 0.2s ease;
+  }
+  
+  .nav-links .btn:hover {
+    background-color: var(--color-accent);
+    color: #fff;
+    border-color: var(--color-accent);
+  }
+  
+  /* 모바일 대응 */
+  @media (max-width: 768px) {
+    .site-header {
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+  
+    .nav-links {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+  
+=======
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.logo {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links .btn {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  color: var(--color-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-links .btn:hover {
+  background-color: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+/* 관리자 전용 버튼 스타일 */
+.header-admin-btn {
+  background-color: #4b5563;
+  color: #fff;
+  border: 1px solid #374151;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header-admin-btn:hover {
+  background-color: #1f2937;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .site-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+>>>>>>> bff76f3 ('25.04.03)

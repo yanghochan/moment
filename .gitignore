@@ -1,0 +1,32 @@
+# macOS specific files
+.DS_Store
+.Trash/
+
+# VSCode settings
+.vscode/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+
+# Other system files or personal configurations
+.gitconfig
+.bash_history
+.bash_profile
+.zsh_history
+.zshrc
+.ipython/
+.conda/
+.cache/
+
+# Python-related files
+*.pyc
+__pycache__/
+
+# Other files
+*.pdf
+*.docx
+*.xlsx
+
