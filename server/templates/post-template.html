@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/" /> <!-- ✅ 추가: 상대경로 기준 고정 -->
+  <title>{{escapedTitle}}</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="blog-post-card">
+    <h1 class="post-title">{{escapedTitle}}</h1> <!-- ✅ 제목도 인코딩된 값 사용 -->
+    <p class="date">📅 {{date}}</p>
+
+    <div class="post-content">
+      {{content}}
+    </div>
+
+    <div class="tags">
+      {{tags}}
+    </div>
+  </div>
+
+  <section class="comments-section">
+    <h2>💬 댓글</h2>
+    <div id="commentList"></div>
+
+    <div id="commentFormArea" style="display: none;">
+      <textarea id="commentInput" placeholder="댓글을 입력하세요..."></textarea>
+      <button id="submitComment" class="btn">댓글 작성</button>
+    </div>
+    <p id="loginNotice">로그인 후 댓글을 작성할 수 있어요.</p>
+  </section>
+
+  <script>
+    const currentUser = localStorage.getItem("moment_user");
+    const postOwner = "{{username}}";
+    const category = "{{category}}";
+    const slug = "{{slug}}";
+
+    async function loadComments() {
+      const res = await fetch(`/api/comments?username=${postOwner}&category=${category}&slug=${slug}`);
+      const data = await res.json();
+      const container = document.getElementById("commentList");
+      container.innerHTML = "";
+
+      data.forEach((comment, index) => {
+        const div = document.createElement("div");
+        div.className = "comment-item";
+        div.innerHTML = `
+          <strong>${comment.user}</strong>: 
+          <span class="comment-text">${comment.text}</span>
+          ${comment.user === currentUser ? `
+            <button class="btn edit-small" onclick="editComment(${index}, '${comment.text}')">✏</button>
+            <button class="btn delete-small" onclick="deleteComment(${index})">🗑</button>
+          ` : ''}
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    if (currentUser) {
+      document.getElementById("commentFormArea").style.display = "block";
+      document.getElementById("loginNotice").style.display = "none";
+
+      document.getElementById("submitComment").onclick = async () => {
+        const text = document.getElementById("commentInput").value;
+        if (!text.trim()) return;
+
+        const res = await fetch("/api/comments", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: postOwner, category, slug, user: currentUser, text })
+        });
+        const result = await res.json();
+        if (result.success) {
+          document.getElementById("commentInput").value = "";
+          loadComments();
+        } else {
+          alert(result.message);
+        }
+      };
+    }
+
+    async function editComment(index, oldText) {
+      const newText = prompt("수정할 내용을 입력하세요", oldText);
+      if (!newText) return;
+
+      const res = await fetch("/api/comments", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: postOwner, category, slug, user: currentUser, index, newText })
+      });
+      const result = await res.json();
+      alert(result.message);
+      if (result.success) loadComments();
+    }
+
+    async function deleteComment(index) {
+      if (!confirm("정말 삭제하시겠습니까?")) return;
+
+      const res = await fetch("/api/comments", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: postOwner, category, slug, user: currentUser, index })
+      });
+      const result = await res.json();
+      alert(result.message);
+      if (result.success) loadComments();
+    }
+
+    loadComments();
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+[
+  {
+    "username": "admin",
+    "password": "$2b$10$CQV9Rw4Kq.xcVBB6FxTc8uj.KCgZD/d4VLR5nJHBMCSZDQTDtawW6",
+    "nickname": "관리자계정",
+    "role": "admin"
+  },
+  {
+    "username": "4",
+    "password": "$2b$10$soTe4PBUy9oiBU7Sq4rqsuKBmpDKkxxxVjC4IYggRwfSJ8ipZDaoS",
+    "nickname": "4",
+    "role": "user"
+  }
+]

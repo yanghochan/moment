@@ -1,0 +1,53 @@
+/* PostCard.css - 글 미리보기 카드 */
+
+.post-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  .post-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+  
+  .post-meta {
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    margin-bottom: 1rem;
+  }
+  
+  .post-desc {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+    word-break: break-word;
+  }
+  
+  /* 반응형 */
+  @media (max-width: 768px) {
+    .post-card {
+      padding: 1.2rem;
+    }
+  
+    .post-title {
+      font-size: 1.1rem;
+    }
+  
+    .post-desc {
+      font-size: 0.95rem;
+    }
+  }
+  

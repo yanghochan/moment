@@ -1,0 +1,159 @@
+/* theme.css - 스톤 블루 테마 (고급 리디자인 - 최대한 고급스럽게 확장) */
+
+:root {
+  --color-background: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-primary: #1b1f23;
+  --color-primary-dark: #0e1012;
+  --color-accent: #a6895d;
+  --color-accent-dark: #8c734a;
+  --color-danger: #a51c30;
+  --color-gray: #5c5c5c;
+  --color-light-gray: #e1e4e8;
+  --color-border: #d1d5da;
+  --color-shadow: rgba(0, 0, 0, 0.06);
+  --color-shadow-dark: rgba(0, 0, 0, 0.12);
+
+  --font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+  --font-size-base: 16px;
+
+  --border-radius: 12px;
+  --transition: all 0.3s ease-in-out;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  border: none;
+}
+
+.btn {
+  background-color: var(--color-accent);
+  color: #fff;
+  padding: 0.7rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 8px 20px var(--color-shadow);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  background-color: var(--color-accent-dark);
+  box-shadow: 0 12px 24px var(--color-shadow-dark);
+}
+
+.btn.delete {
+  background-color: var(--color-danger);
+}
+
+.btn.delete:hover {
+  background-color: #7f0014;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  padding: 0.7rem 1rem;
+  background: white;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(166, 137, 93, 0.15);
+  outline: none;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: var(--color-gray);
+}
+
+.text-danger {
+  color: var(--color-danger);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+header {
+  background-color: var(--color-surface);
+  box-shadow: 0 4px 10px var(--color-shadow);
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--color-accent);
+  font-family: 'Cormorant Garamond', serif;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    margin-bottom: 0.5rem;
+  }
+}

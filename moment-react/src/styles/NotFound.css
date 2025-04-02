@@ -1,0 +1,46 @@
+/* NotFound.css - 감성적인 404 페이지 스타일 */
+.notfound-container {
+    max-width: 700px;
+    margin: 6rem auto;
+    padding: 3rem 2.5rem;
+    background: linear-gradient(to bottom, #fdfcfb, #f4f6f8);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    font-family: 'Noto Serif KR', 'Georgia', serif;
+  }
+  
+  .notfound-illustration {
+    width: 160px;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08));
+  }
+  
+  .notfound-container h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .notfound-message {
+    font-size: 1.1rem;
+    color: var(--color-gray);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+  
+  .notfound-container .btn {
+    background-color: var(--color-accent);
+    color: #fff;
+    padding: 0.75rem 1.6rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .notfound-container .btn:hover {
+    background-color: var(--color-accent-dark);
+  }
+  

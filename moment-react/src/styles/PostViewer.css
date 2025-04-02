@@ -1,0 +1,60 @@
+/* PostViewer.css - 고급 스타일 리팩토링 */
+
+.post-viewer {
+    max-width: 960px;
+    margin: 4rem auto;
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    font-family: 'Georgia', serif;
+  }
+  
+  .post-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 6rem auto;
+    color: #444;
+  }
+  
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #e0e0e0;
+    border-top: 5px solid #3e64ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-text {
+    font-size: 1.1rem;
+    color: #666;
+  }
+  
+  .error-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #a00;
+    padding: 3rem 0;
+  }
+  
+  /* 반응형 */
+  @media (max-width: 768px) {
+    .post-viewer {
+      padding: 1.5rem;
+    }
+  
+    .loading-text,
+    .error-text {
+      font-size: 1rem;
+    }
+  }
+  
