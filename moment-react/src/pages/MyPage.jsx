@@ -42,7 +42,6 @@ export default function MyPage() {
     }
   };
 
-<<<<<<< HEAD
   const handleDeleteUser = () => {
     const user = localStorage.getItem("moment_user");
     const password = prompt("비밀번호를 입력하세요");
@@ -67,28 +66,6 @@ export default function MyPage() {
             alert("탈퇴 실패: " + result.message);
           }
         });
-=======
-  const handleDeleteUser = async () => {
-    const confirmed = window.confirm("정말 회원 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.");
-    if (!confirmed) return;
-
-    const user = localStorage.getItem("moment_user");
-    const password = prompt("비밀번호를 입력해주세요");
-
-    const res = await fetch(`/api/auth/deleteUser/${user}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
-
-    const result = await res.json();
-    if (result.success) {
-      alert("✅ 회원 탈퇴가 완료되었습니다.");
-      localStorage.removeItem("moment_user");
-      navigate("/");
-    } else {
-      alert("❌ 탈퇴 실패: " + result.message);
->>>>>>> bff76f3 ('25.04.03)
     }
   };
 
@@ -116,8 +93,4 @@ export default function MyPage() {
       )}
     </main>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bff76f3 ('25.04.03)

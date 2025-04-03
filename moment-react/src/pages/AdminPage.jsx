@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import AdminUserList from "../components/admin/AdminUserList";
-import "../styles/AdminPage.css"; // ⬅️ 클래스명만 바꾼 최신 CSS를 연결해야 함
+import "../styles/AdminPage.css";
 
 export default function AdminPage() {
   const { isAdmin, username } = useAuth();
   const [users, setUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showOnlyAdmins, setShowOnlyAdmins] = useState(false);
   const navigate = useNavigate();
 
-  // 🔐 관리자 권한 확인 및 유저 목록 로딩
   useEffect(() => {
     if (!isAdmin) {
       alert("❌ 접근 권한이 없습니다.");
@@ -32,7 +33,6 @@ export default function AdminPage() {
     fetchUsers();
   }, [isAdmin, navigate]);
 
-  // 🗑️ 계정 삭제 핸들러
   const handleDelete = async (targetUsername) => {
     if (targetUsername === username) {
       alert("❌ 본인 계정은 삭제할 수 없습니다.");
@@ -62,6 +62,13 @@ export default function AdminPage() {
     }
   };
 
+  // 🔍 필터링된 유저 리스트
+  const filteredUsers = users.filter((u) => {
+    const matchesSearch = u.username.toLowerCase().includes(searchQuery.toLowerCase()) || u.nickname?.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesAdmin = showOnlyAdmins ? u.role === "admin" : true;
+    return matchesSearch && matchesAdmin;
+  });
+
   return (
     <main className="admin-page-container">
       <header className="admin-page-header">
@@ -72,13 +79,37 @@ export default function AdminPage() {
       <section className="admin-page-section">
         <div className="admin-page-card">
           <div className="admin-page-card-header">
-            <h2>👥 전체 사용자 <span className="count">({users.length})</span></h2>
+            <h2>👥 전체 사용자 <span className="count">({filteredUsers.length})</span></h2>
           </div>
 
-          {users.length === 0 ? (
-            <p className="empty-text">등록된 사용자가 없습니다.</p>
+          {/* 🔎 검색창 + 필터 버튼 */}
+          <div className="admin-filter-controls">
+            <input
+              type="text"
+              placeholder="닉네임 또는 아이디 검색..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <div className="admin-filter-buttons">
+              <button
+                className={!showOnlyAdmins ? "active" : ""}
+                onClick={() => setShowOnlyAdmins(false)}
+              >
+                전체 보기
+              </button>
+              <button
+                className={showOnlyAdmins ? "active" : ""}
+                onClick={() => setShowOnlyAdmins(true)}
+              >
+                관리자만
+              </button>
+            </div>
+          </div>
+
+          {filteredUsers.length === 0 ? (
+            <p className="empty-text">검색 결과가 없습니다.</p>
           ) : (
-            <AdminUserList users={users} onDelete={handleDelete} />
+            <AdminUserList users={filteredUsers} onDelete={handleDelete} />
           )}
         </div>
       </section>

@@ -16,10 +16,7 @@
     "cheerio": "^1.0.0",
     "connect-history-api-fallback": "^2.0.0",
     "cors": "^2.8.5",
-<<<<<<< HEAD
-=======
     "dotenv": "^16.4.7",
->>>>>>> bff76f3 ('25.04.03)
     "express": "^4.21.2"
   }
 }

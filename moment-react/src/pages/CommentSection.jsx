@@ -1,4 +1,4 @@
-// CommentSection.jsx 
+// src/pages/CommentSection.jsx
 import { useEffect, useState } from "react";
 import "../styles/CommentSection.css";
 
@@ -21,37 +21,9 @@ export default function CommentSection({ username, category, slug }) {
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
-      .then((result) => result.success ? callback(result) : alert("❌ 요청 실패"));
+      .then((result) => (result.success ? callback(result) : alert("❌ 요청 실패")));
   };
 
-<<<<<<< HEAD
-  const handleSubmit = () => {
-    if (!user || !newComment.trim()) return;
-    apiCall("/api/comments", "POST", { username, category, slug, user, text: newComment }, () => {
-      setComments((prev) => [
-        { user, text: newComment, time: new Date().toISOString(), likedUsers: [], likes: 0, replies: [] },
-        ...prev
-      ]);
-      setNewComment("");
-    });
-  };
-
-  const handleNestedAction = (chain, action, payload = {}) => {
-    const updateNested = (list, chain, updater) => {
-      const [head, ...rest] = chain;
-      return list.map((item, idx) => {
-        if (idx === head) {
-          if (rest.length === 0) return updater(item);
-          return {
-            ...item,
-            replies: updateNested(item.replies || [], rest, updater)
-          };
-        }
-        return item;
-      });
-    };
-
-=======
   const updateNested = (list, chain, updater) => {
     const [head, ...rest] = chain;
     return list.map((item, i) => {
@@ -59,7 +31,7 @@ export default function CommentSection({ username, category, slug }) {
         if (rest.length === 0) return updater(item);
         return {
           ...item,
-          replies: updateNested(item.replies || [], rest, updater)
+          replies: updateNested(item.replies || [], rest, updater),
         };
       }
       return item;
@@ -67,18 +39,11 @@ export default function CommentSection({ username, category, slug }) {
   };
 
   const handleAction = (chain, action, payload = {}) => {
->>>>>>> bff76f3 ('25.04.03)
     switch (action) {
       case "reply": {
         const { text } = payload;
         apiCall("/api/comments/reply", "POST", { username, category, slug, chain, user, text }, () => {
-<<<<<<< HEAD
-          setComments((prev) => updateNested(prev, chain, (item) => ({
-            ...item,
-            replies: [...(item.replies || []), { user, text, time: new Date().toISOString(), likedUsers: [], likes: 0, replies: [] }]
-          })));
-=======
-          setComments(prev =>
+          setComments((prev) =>
             updateNested(prev, chain, (item) => ({
               ...item,
               replies: [
@@ -87,18 +52,18 @@ export default function CommentSection({ username, category, slug }) {
               ],
             }))
           );
->>>>>>> bff76f3 ('25.04.03)
         });
         break;
       }
       case "edit": {
         const { newText } = payload;
         apiCall("/api/comments/edit", "PUT", { username, category, slug, chain, user, newText }, () => {
-<<<<<<< HEAD
-          setComments((prev) => updateNested(prev, chain, (item) => ({ ...item, text: newText })));
-=======
-          setComments(prev => updateNested(prev, chain, (item) => ({ ...item, text: newText })));
->>>>>>> bff76f3 ('25.04.03)
+          setComments((prev) =>
+            updateNested(prev, chain, (item) => ({
+              ...item,
+              text: newText,
+            }))
+          );
         });
         break;
       }
@@ -108,44 +73,23 @@ export default function CommentSection({ username, category, slug }) {
           const deleteNested = (list, chain) => {
             const [head, ...rest] = chain;
             if (rest.length === 0) return list.filter((_, i) => i !== head);
-<<<<<<< HEAD
-            return list.map((item, idx) => {
-              if (idx === head) {
-                return {
-                  ...item,
-                  replies: deleteNested(item.replies || [], rest)
-=======
             return list.map((item, i) => {
               if (i === head) {
                 return {
                   ...item,
                   replies: deleteNested(item.replies || [], rest),
->>>>>>> bff76f3 ('25.04.03)
                 };
               }
               return item;
             });
           };
-<<<<<<< HEAD
           setComments((prev) => deleteNested(prev, chain));
-=======
-          setComments(prev => deleteNested(prev, chain));
->>>>>>> bff76f3 ('25.04.03)
         });
         break;
       }
       case "like": {
         apiCall("/api/comments/likeToggle", "POST", { username, category, slug, chain, user }, (result) => {
-<<<<<<< HEAD
-          setComments((prev) => updateNested(prev, chain, (item) => ({
-            ...item,
-            likes: result.likes,
-            likedUsers: result.liked
-              ? [...(item.likedUsers || []), user]
-              : (item.likedUsers || []).filter((u) => u !== user)
-          })));
-=======
-          setComments(prev =>
+          setComments((prev) =>
             updateNested(prev, chain, (item) => ({
               ...item,
               likes: result.likes,
@@ -154,7 +98,6 @@ export default function CommentSection({ username, category, slug }) {
                 : (item.likedUsers || []).filter((u) => u !== user),
             }))
           );
->>>>>>> bff76f3 ('25.04.03)
         });
         break;
       }
@@ -163,55 +106,63 @@ export default function CommentSection({ username, category, slug }) {
     }
   };
 
+  const handleSubmit = () => {
+    if (!user || !newComment.trim()) return;
+    apiCall("/api/comments", "POST", { username, category, slug, user, text: newComment }, () => {
+      setComments((prev) => [
+        {
+          user,
+          text: newComment,
+          time: new Date().toISOString(),
+          likes: 0,
+          likedUsers: [],
+          replies: [],
+        },
+        ...prev,
+      ]);
+      setNewComment("");
+    });
+  };
+
   const CommentItem = ({ comment, chain = [] }) => {
-<<<<<<< HEAD
-    const [showReply, setShowReply] = useState(false);
     const [replyText, setReplyText] = useState("");
+    const [showReply, setShowReply] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
 
     const handleReply = () => {
       if (!replyText.trim()) return;
-      handleNestedAction(chain, "reply", { text: replyText });
+      handleAction(chain, "reply", { text: replyText });
       setReplyText("");
       setShowReply(false);
     };
 
-=======
-    const [replyText, setReplyText] = useState("");
-    const [showReply, setShowReply] = useState(false);
-    const [collapsed, setCollapsed] = useState(false);
-
->>>>>>> bff76f3 ('25.04.03)
     return (
       <li className={chain.length === 0 ? "comment" : "reply"}>
         <strong>{comment.user}</strong>: {comment.text}
         <div className="comment-time">🕒 {new Date(comment.time).toLocaleString()}</div>
-<<<<<<< HEAD
 
-        <div className={chain.length === 0 ? "comment-actions" : "reply-actions"}>
-          <button onClick={() => handleNestedAction(chain, "like")}>❤️ ({comment.likes || 0})</button>
-=======
         <div className="comment-actions">
           <button onClick={() => handleAction(chain, "like")}>❤️ ({comment.likes || 0})</button>
->>>>>>> bff76f3 ('25.04.03)
           {user === comment.user && (
             <>
-              <button onClick={() => {
-                const newText = prompt("수정할 내용을 입력하세요", comment.text);
-<<<<<<< HEAD
-                if (newText && newText !== comment.text) handleNestedAction(chain, "edit", { newText });
-              }}>✏️</button>
-              <button onClick={() => handleNestedAction(chain, "delete")}>🗑</button>
-=======
-                if (newText && newText !== comment.text) handleAction(chain, "edit", { newText });
-              }}>✏️</button>
+              <button
+                onClick={() => {
+                  const newText = prompt("수정할 내용을 입력하세요", comment.text);
+                  if (newText && newText !== comment.text) {
+                    handleAction(chain, "edit", { newText });
+                  }
+                }}
+              >
+                ✏️
+              </button>
               <button onClick={() => handleAction(chain, "delete")}>🗑</button>
->>>>>>> bff76f3 ('25.04.03)
             </>
           )}
           <button onClick={() => setShowReply(!showReply)}>💬 답글</button>
           {comment.replies?.length > 0 && (
-            <button onClick={() => setCollapsed(!collapsed)}>{collapsed ? "🔽 펼치기" : "🔼 접기"}</button>
+            <button onClick={() => setCollapsed(!collapsed)}>
+              {collapsed ? "🔽 펼치기" : "🔼 접기"}
+            </button>
           )}
         </div>
 
@@ -221,19 +172,8 @@ export default function CommentSection({ username, category, slug }) {
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
               placeholder="답글을 입력하세요"
-<<<<<<< HEAD
             ></textarea>
             <button onClick={handleReply}>답글 등록</button>
-=======
-            />
-            <button onClick={() => {
-              if (replyText.trim()) {
-                handleAction(chain, "reply", { text: replyText });
-                setReplyText("");
-                setShowReply(false);
-              }
-            }}>답글 등록</button>
->>>>>>> bff76f3 ('25.04.03)
           </div>
         )}
 
@@ -256,35 +196,18 @@ export default function CommentSection({ username, category, slug }) {
           <CommentItem key={idx} comment={c} chain={[idx]} />
         ))}
       </ul>
-<<<<<<< HEAD
-
-=======
->>>>>>> bff76f3 ('25.04.03)
       {user ? (
         <div className="comment-form">
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="댓글을 입력하세요"
-<<<<<<< HEAD
           ></textarea>
           <button onClick={handleSubmit}>등록</button>
-=======
-          />
-          <button onClick={() => {
-            if (!newComment.trim()) return;
-            handleAction([], "reply", { text: newComment });
-            setNewComment("");
-          }}>등록</button>
->>>>>>> bff76f3 ('25.04.03)
         </div>
       ) : (
         <p>댓글을 작성하려면 로그인하세요.</p>
       )}
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bff76f3 ('25.04.03)

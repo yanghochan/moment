@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-// userPage.js
-=======
->>>>>>> bff76f3 ('25.04.03)
+
 // server/routes/userPage.js
 const express = require("express");
 const fs = require("fs");

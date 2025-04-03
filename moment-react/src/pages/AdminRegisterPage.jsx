@@ -5,10 +5,12 @@ import { useAuth } from "../contexts/AuthContext";
 import "../styles/AdminRegister.css";
 
 export default function AdminRegisterPage() {
-  const { isAdmin } = useAuth();
+  const { isAdmin, username: currentUser } = useAuth();
   const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [nickname, setNickname] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -19,18 +21,19 @@ export default function AdminRegisterPage() {
   }, [isAdmin, navigate]);
 
   const handleRegister = async () => {
-    if (!username || !password) {
+    if (!username || !password || !nickname) {
       return setError("⚠️ 모든 항목을 입력해주세요.");
     }
 
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/api/auth/admin-register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username,
           password,
-          adminCode: "moment2025",
+          nickname,
+          requester: currentUser, // 현재 로그인한 관리자 이름
         }),
       });
 
@@ -74,8 +77,18 @@ export default function AdminRegisterPage() {
           />
         </div>
 
+        <div className="admin-register-form-group">
+          <label>닉네임</label>
+          <input
+            type="text"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            placeholder="관리자 닉네임"
+          />
+        </div>
+
         <button className="admin-register-btn" onClick={handleRegister}>
-          등록하기
+          관리자 등록
         </button>
       </form>
     </main>

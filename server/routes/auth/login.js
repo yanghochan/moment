@@ -1,4 +1,4 @@
-// login.js
+// routes/auth/login.js
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
@@ -34,19 +34,15 @@ router.post('/', async (req, res) => {
     return res.json({ success: false, message: '비밀번호가 틀렸습니다.' });
   }
 
-<<<<<<< HEAD
-  res.json({ success: true, message: '로그인 성공!' });
-=======
-  // ✅ 관리자 여부를 함께 응답
   const role = user.role === "admin" ? "admin" : "user";
 
-  res.json({
+  // ✅ 응답은 딱 한 번만!
+  return res.json({
     success: true,
     message: '로그인 성공!',
     username: user.username,
-    role, // ✅ 추가
+    role,
   });
->>>>>>> bff76f3 ('25.04.03)
 });
 
 module.exports = router;
