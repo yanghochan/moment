@@ -1,21 +1,21 @@
 /* AdminPage 스타일 리팩토링 (클래스명 일괄 변경 포함 + 필터 영역 추가) */
 
 .admin-page-container {
-  padding: 2rem 3rem;
-  background-color: #f9fafb;
-  font-family: 'Pretendard', sans-serif;
+  padding: 3rem 4rem;
+  background-color: #f3f4f6;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
   min-height: 100vh;
-  color: #1f2937;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .admin-page-header {
   margin-bottom: 2.5rem;
   border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 .admin-page-header h1 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 800;
   color: #1f2937;
   display: flex;
@@ -26,20 +26,15 @@
 .admin-page-subtitle {
   font-size: 1rem;
   color: #6b7280;
-  margin-top: 0.5rem;
-}
-
-.admin-page-section {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  margin-top: 0.4rem;
 }
 
 .admin-page-card {
   background: #ffffff;
   padding: 2rem;
-  border-radius: 1.25rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
 }
 
 .admin-page-card-header {
@@ -52,10 +47,43 @@
 .admin-page-card-header h2 {
   font-size: 1.25rem;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   color: #111827;
+}
+
+.admin-filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-filter-controls input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+}
+
+.admin-filter-buttons button,
+.admin-sort-controls select {
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-filter-buttons .active {
+  background: #4f46e5;
+  color: white;
+  border-color: transparent;
 }
 
 .admin-user-list {
@@ -65,76 +93,37 @@
 }
 
 .admin-user-item {
-  background-color: #f3f4f6;
-  padding: 1rem 1.25rem;
-  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  background: #f9fafb;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-left: 5px solid transparent;
 }
 
 .admin-user-item.admin-role {
-  background-color: #fef9c3;
+  background: #fef9c3;
   border-left: 5px solid #facc15;
 }
 
-.admin-user-name {
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: #1f2937;
+.pagination-controls {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
-.admin-user-role {
-  font-size: 0.9rem;
-  color: #6b7280;
-}
-
-.admin-user-badge {
-  background-color: crimson;
-  color: white;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.75rem;
-  border-radius: 0.5rem;
-  margin-left: 0.5rem;
+.page-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #e5e7eb;
+  cursor: pointer;
   font-weight: 500;
 }
 
-.empty-text {
-  font-size: 1rem;
-  color: #9ca3af;
-  text-align: center;
-}
-
-.admin-filter-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.admin-filter-controls input {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  flex: 1;
-  margin-right: 1rem;
-}
-
-.admin-filter-buttons button {
-  margin-left: 0.5rem;
-  padding: 0.4rem 1rem;
-  border: none;
-  background-color: #f0f0f0;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.admin-filter-buttons button:hover {
-  background-color: #e5e7eb;
-}
-
-.admin-filter-buttons .active {
-  background-color: #111827;
+.page-btn.active {
+  background-color: #4f46e5;
   color: white;
 }

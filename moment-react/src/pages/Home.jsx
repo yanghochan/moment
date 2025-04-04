@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import { useState } from "react";
-import "../styles/Home.css"
+import "../styles/Home.css";
 import { useNavigate, Link } from "react-router-dom";
 import useAuthUser from "../hooks/useAuthUser";
 import useAllPosts from "../hooks/useAllPosts";
@@ -19,35 +19,37 @@ export default function Home() {
   );
 
   return (
-    <div className="main-hero container">
-      <h1 className="main-title">📸 Moment</h1>
-      <p className="subtitle">기억이 되는 순간을 담다</p>
+    <main className="home-hero">
+      <div className="home-inner container">
+        <h1 className="home-title">📸 Moment</h1>
+        <p className="home-subtitle">기억이 되는 순간을 담다</p>
 
-      {username && (
-        <p className="welcome">
-          👋 <span className="highlight">{nickname}</span>님 환영합니다!
-        </p>
-      )}
-
-      <div className="auth-buttons">
-        {username ? (
-          <>
-            <button onClick={logout} className="btn">로그아웃</button>
-            <button onClick={() => navigate(`/user/${username}`)} className="btn">마이페이지</button>
-            <button onClick={() => navigate("/write")} className="btn">✍️ 글쓰기</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="btn">🔑 로그인</Link>
-            <Link to="/register" className="btn">✨ 회원가입</Link>
-          </>
+        {username && (
+          <p className="home-welcome">
+            안녕하세요, <span className="highlight">{nickname}</span>님 👋
+          </p>
         )}
+
+        <div className="home-actions">
+          {username ? (
+            <>
+              <button onClick={logout} className="btn">로그아웃</button>
+              <button onClick={() => navigate(`/user/${username}`)} className="btn">마이페이지</button>
+              <button onClick={() => navigate("/write")} className="btn">✍️ 글쓰기</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn">🔑 로그인</Link>
+              <Link to="/register" className="btn">✨ 회원가입</Link>
+            </>
+          )}
+        </div>
+
+        <SearchInput value={search} onChange={(e) => setSearch(e.target.value)} />
+        <PostList posts={filteredPosts} />
+
+        <footer className="home-footer mt-8 mb-4 text-muted">© 2025 Moment. All rights reserved.</footer>
       </div>
-
-      <SearchInput value={search} onChange={(e) => setSearch(e.target.value)} />
-      <PostList posts={filteredPosts} />
-
-      <footer className="text-center mt-8 mb-4 text-gray">© 2025 Moment</footer>
-    </div>
+    </main>
   );
 }

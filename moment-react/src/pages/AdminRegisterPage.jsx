@@ -33,7 +33,7 @@ export default function AdminRegisterPage() {
           username,
           password,
           nickname,
-          requester: currentUser, // 현재 로그인한 관리자 이름
+          requester: currentUser,
         }),
       });
 

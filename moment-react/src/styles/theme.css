@@ -1,24 +1,25 @@
-/* theme.css - 스톤 블루 테마 (고급 리디자인 - 최대한 고급스럽게 확장) */
+/* theme.css - Stone Blue Lux Edition */
+
 
 :root {
-  --color-background: #f4f5f7;
+  --color-background: #f4f6fb;
   --color-surface: #ffffff;
-  --color-primary: #1b1f23;
-  --color-primary-dark: #0e1012;
-  --color-accent: #a6895d;
-  --color-accent-dark: #8c734a;
-  --color-danger: #a51c30;
-  --color-gray: #5c5c5c;
-  --color-light-gray: #e1e4e8;
-  --color-border: #d1d5da;
+  --color-primary: #1f2937;
+  --color-primary-dark: #111827;
+  --color-accent: #5561d7; /* 인디고 블루 (Auth 기준) */
+  --color-accent-dark: #3f48a3;
+  --color-danger: #e63946;
+  --color-gray: #6b7280;
+  --color-light-gray: #e5e7eb;
+  --color-border: #d1d5db;
   --color-shadow: rgba(0, 0, 0, 0.06);
   --color-shadow-dark: rgba(0, 0, 0, 0.12);
 
-  --font-family: 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+  --font-family: 'Playfair Display', 'Pretendard', sans-serif;
   --font-size-base: 16px;
 
   --border-radius: 12px;
-  --transition: all 0.3s ease-in-out;
+  --transition: all 0.3s ease;
 }
 
 body {
@@ -81,7 +82,7 @@ input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(166, 137, 93, 0.15);
+  box-shadow: 0 0 0 3px rgba(85, 97, 215, 0.2);
   outline: none;
 }
 
@@ -135,7 +136,7 @@ header {
   font-size: 1.6rem;
   font-weight: bold;
   color: var(--color-accent);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
 }
 
 @media (max-width: 768px) {

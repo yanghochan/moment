@@ -1,13 +1,14 @@
 // src/components/AuthForm.jsx
+// src/components/AuthForm.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; // ✅ 로그인 전역 상태 반영
+import { useAuth } from "../contexts/AuthContext";
 import "../styles/Auth.css";
 
 export default function AuthForm({ type }) {
   const isRegister = type === "register";
   const navigate = useNavigate();
-  const { login } = useAuth(); // ✅ 로그인 시 Context 업데이트
+  const { login } = useAuth();
 
   const [form, setForm] = useState({
     username: "",
@@ -28,11 +29,11 @@ export default function AuthForm({ type }) {
 
     const { username, password, nickname } = form;
     if (!username || !password || (isRegister && !nickname)) {
-      return setError("⚠️ 모든 항목을 입력해주세요.");
+      return setError("모든 항목을 입력해주세요.");
     }
 
     if (isRegister && password !== confirm) {
-      return setError("⚠️ 비밀번호가 일치하지 않습니다.");
+      return setError("비밀번호가 일치하지 않습니다.");
     }
 
     const endpoint = isRegister ? "/api/auth/register" : "/api/auth/login";
@@ -49,44 +50,50 @@ export default function AuthForm({ type }) {
 
       const result = await res.json();
       if (result.success) {
-        alert(isRegister ? "🎉 회원가입 성공!" : "✅ 로그인 성공!");
-
+        alert(isRegister ? "회원가입 완료!" : "로그인 성공!");
         if (isRegister) {
           navigate("/login");
         } else {
-          login(username, result.role === "admin"); // ✅ 관리자 여부 반영
+          login(username, result.role === "admin");
           navigate(`/user/${username}`);
         }
       } else {
-        setError(result.message || "❌ 오류가 발생했습니다.");
+        setError(result.message || "오류가 발생했습니다.");
       }
     } catch (err) {
-      console.error("🚨 서버 통신 실패:", err);
-      setError("🚨 서버 오류가 발생했습니다.");
+      console.error(err);
+      setError("서버 오류가 발생했습니다.");
     }
   };
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
-        <h2 className="auth-title">{isRegister ? "회원가입" : "로그인"}</h2>
-        {error && <p className="error-text">{error}</p>}
+      <div className="auth-card luxe-card">
+        <h1 className="auth-heading">
+          {isRegister ? "Join Moment" : "Welcome Back"}
+        </h1>
+        <p className="auth-subtext">
+          {isRegister
+            ? "나만의 순간을 기록할 준비 되셨나요?"
+            : "기억을 이어가는 순간, 다시 만나요."}
+        </p>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
+        {error && <p className="auth-error">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="auth-form">
           <input
+            type="text"
             name="username"
             placeholder="아이디"
             value={form.username}
             onChange={handleChange}
-            required
           />
           <input
-            name="password"
             type="password"
+            name="password"
             placeholder="비밀번호"
             value={form.password}
             onChange={handleChange}
-            required
           />
           {isRegister && (
             <>
@@ -95,31 +102,35 @@ export default function AuthForm({ type }) {
                 placeholder="비밀번호 확인"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
-                required
               />
               <input
+                type="text"
                 name="nickname"
                 placeholder="닉네임"
                 value={form.nickname}
                 onChange={handleChange}
-                required
               />
             </>
           )}
-
-          <button type="submit" className="btn">
-            {isRegister ? "가입하기" : "로그인"}
+          <button className="auth-btn" type="submit">
+            {isRegister ? "Moment 시작하기" : "로그인"}
           </button>
         </form>
 
         <div className="auth-footer">
           {isRegister ? (
             <p>
-              이미 계정이 있으신가요? <a href="/login">로그인</a>
+              이미 계정이 있으신가요?{" "}
+              <a href="/login" className="auth-link">
+                로그인하기
+              </a>
             </p>
           ) : (
             <p>
-              계정이 없으신가요? <a href="/register">회원가입</a>
+              처음이신가요?{" "}
+              <a href="/register" className="auth-link">
+                회원가입
+              </a>
             </p>
           )}
         </div>
